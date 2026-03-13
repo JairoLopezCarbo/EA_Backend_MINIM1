@@ -1,37 +1,79 @@
-import mongoose, { Document, Schema, Types } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 export interface IUser {
     name: string;
+    surname: string;
+    username: string;
     email: string;
     password: string;
-    favoriteRoutes: Types.ObjectId[];
-    completedRoutes: Types.ObjectId[];
+    enabled: boolean;
     createdAt: Date;
     updatedAt: Date;
 }
 
-export interface IUserModel extends IUser, Document {}
+export interface IUserModel extends IUser, Document {
+    comparePassword(candidatePassword: string): Promise<boolean>;
+}
 
 const UserSchema: Schema = new Schema(
     {
         name: { type: String, required: true },
+        surname: { type: String, required: true },
+        username: { type: String, required: true, unique: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
-        favoriteRoutes: {
-            type: [Schema.Types.ObjectId],
-            ref: 'Route',
-            default: []
-        },
-        completedRoutes: {
-            type: [Schema.Types.ObjectId],
-            ref: 'Route',
-            default: []
-        }
+        enabled: { type: Boolean, default: true }
     },
     {
         timestamps: true,
-        versionKey: false
+        versionKey: false,
+        toJSON: {
+            virtuals: true,
+            transform: function (doc, ret) {
+                delete ret.password;
+                return ret;
+            }
+        },
+        toObject: {
+            virtuals: true
+        }
     }
 );
+
+/**
+ * Virtual: rutas creadas por el usuario
+ */
+UserSchema.virtual('routes', {
+    ref: 'Route',
+    localField: '_id',
+    foreignField: 'authorId'
+});
+
+/**
+ * Hook: hashea la contraseña antes de guardar
+ */
+UserSchema.pre('save', async function (next) {
+    const user = this as IUserModel;
+
+    if (!user.isModified('password')) {
+        return next();
+    }
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(user.password, salt);
+        next();
+    } catch (error) {
+        next(error as Error);
+    }
+});
+
+/**
+ * Método para comparar contraseña
+ */
+UserSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
+    return await bcrypt.compare(candidatePassword, this.password);
+};
 
 export default mongoose.model<IUserModel>('User', UserSchema);

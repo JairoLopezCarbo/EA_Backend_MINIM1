@@ -22,22 +22,21 @@ const router = express.Router();
  *         name:
  *           type: string
  *           example: "Judit"
+ *         surname:
+ *           type: string
+ *           example: "Martinez"
+ *         username:
+ *           type: string
+ *           example: "judit99"
  *         email:
  *           type: string
  *           example: "judit@gmail.com"
  *         password:
  *           type: string
  *           example: "password123"
- *         favoriteRoutes:
- *           type: array
- *           items:
- *             type: string
- *           example: ["65f1c2a1b2c3d4e5f6789014"]
- *         completedRoutes:
- *           type: array
- *           items:
- *             type: string
- *           example: ["65f1c2a1b2c3d4e5f6789015"]
+ *         enabled:
+ *           type: boolean
+ *           example: true
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -51,12 +50,20 @@ const router = express.Router();
  *       type: object
  *       required:
  *         - name
+ *         - surname
+ *         - username
  *         - email
  *         - password
  *       properties:
  *         name:
  *           type: string
  *           example: "Judit"
+ *         surname:
+ *           type: string
+ *           example: "Martinez"
+ *         username:
+ *           type: string
+ *           example: "judit99"
  *         email:
  *           type: string
  *           example: "judit@gmail.com"
@@ -70,22 +77,21 @@ const router = express.Router();
  *         name:
  *           type: string
  *           example: "Judit"
+ *         surname:
+ *           type: string
+ *           example: "Martinez"
+ *         username:
+ *           type: string
+ *           example: "judit99"
  *         email:
  *           type: string
  *           example: "judit@gmail.com"
  *         password:
  *           type: string
  *           example: "password123"
- *         favoriteRoutes:
- *           type: array
- *           items:
- *             type: string
- *           example: ["65f1c2a1b2c3d4e5f6789014"]
- *         completedRoutes:
- *           type: array
- *           items:
- *             type: string
- *           example: ["65f1c2a1b2c3d4e5f6789015"]
+ *         enabled:
+ *           type: boolean
+ *           example: true
  */
 
 /**
@@ -110,6 +116,18 @@ router.post('/', ValidateJoi(Schemas.User.create), controller.createUser);
 
 /**
  * @openapi
+ * /Users:
+ *   get:
+ *     summary: Lista todos los Users
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+router.get('/', controller.readAll);
+
+/**
+ * @openapi
  * /Users/{UserId}:
  *   get:
  *     summary: Obtiene un User por ID
@@ -128,18 +146,6 @@ router.post('/', ValidateJoi(Schemas.User.create), controller.createUser);
  *         description: No encontrado
  */
 router.get('/:UserId', controller.readUser);
-
-/**
- * @openapi
- * /Users:
- *   get:
- *     summary: Lista todos los Users
- *     tags: [Users]
- *     responses:
- *       200:
- *         description: OK
- */
-router.get('/', controller.readAll);
 
 /**
  * @openapi

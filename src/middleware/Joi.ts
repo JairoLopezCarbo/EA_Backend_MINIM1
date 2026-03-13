@@ -18,19 +18,18 @@ export const Schemas = {
     User: {
         create: Joi.object({
             name: Joi.string().required(),
+            surname: Joi.string().required(),
+            username: Joi.string().required(),
             email: Joi.string().email().required(),
             password: Joi.string().min(6).required()
         }),
         update: Joi.object({
             name: Joi.string().optional(),
+            surname: Joi.string().optional(),
+            username: Joi.string().optional(),
             email: Joi.string().email().optional(),
             password: Joi.string().min(6).optional(),
-            favoriteRoutes: Joi.array()
-                .items(Joi.string().pattern(/^[0-9a-fA-F]{24}$/))
-                .optional(),
-            completedRoutes: Joi.array()
-                .items(Joi.string().pattern(/^[0-9a-fA-F]{24}$/))
-                .optional()
+            enabled: Joi.boolean().optional()
         }).min(1)
     },
 
