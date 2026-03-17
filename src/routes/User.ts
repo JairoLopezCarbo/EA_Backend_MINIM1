@@ -12,7 +12,7 @@ const router = express.Router();
  *
  * components:
  *   schemas:
- *     user:
+ *     User:
  *       type: object
  *       properties:
  *         _id:
@@ -46,7 +46,7 @@ const router = express.Router();
  *           format: date-time
  *           example: "2026-03-07T15:00:00.000Z"
  *
- *     userCreate:
+ *     UserCreate:
  *       type: object
  *       required:
  *         - name
@@ -71,7 +71,7 @@ const router = express.Router();
  *           type: string
  *           example: "password123"
  *
- *     userUpdate:
+ *     UserUpdate:
  *       type: object
  *       properties:
  *         name:

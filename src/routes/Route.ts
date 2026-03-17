@@ -59,7 +59,7 @@ const router = express.Router();
  *           format: date-time
  *           example: "2026-03-13T09:30:00.000Z"
  *
- *     routeCreate:
+ *     RouteCreate:
  *       type: object
  *       required:
  *         - title
@@ -105,7 +105,7 @@ const router = express.Router();
  *           type: string
  *           example: "65f1c2a1b2c3d4e5f6789001"
  *
- *     routeUpdate:
+ *     RouteUpdate:
  *       type: object
  *       properties:
  *         title:
