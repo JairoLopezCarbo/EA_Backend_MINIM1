@@ -31,13 +31,13 @@ const updateUser = async (userId: string, data: Partial<IUser>): Promise<IUserMo
 };
 
 const deleteUser = async (userId: string): Promise<IUserModel | null> => {
-    const routes = await RouteModel.find({ authorId: userId }).select('_id').lean();
+    const routes = await RouteModel.find({ userId: userId }).select('_id').lean();
 
     const routeIds = routes.map((route) => route._id);
 
     if (routeIds.length > 0) {
         await PointModel.deleteMany({ routeId: { $in: routeIds } }).exec();
-        await RouteModel.deleteMany({ authorId: userId }).exec();
+        await RouteModel.deleteMany({ userId: userId }).exec();
     }
 
     return await User.findByIdAndDelete(userId);

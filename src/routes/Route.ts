@@ -47,7 +47,7 @@ const router = express.Router();
  *         image:
  *           type: string
  *           example: "https://miapp.com/montserrat.jpg"
- *         authorId:
+ *         userId:
  *           type: string
  *           example: "65f1c2a1b2c3d4e5f6789001"
  *         createdAt:
@@ -69,7 +69,7 @@ const router = express.Router();
  *         - distance
  *         - duration
  *         - difficulty
- *         - authorId
+ *         - userId
  *       properties:
  *         title:
  *           type: string
@@ -101,7 +101,7 @@ const router = express.Router();
  *         image:
  *           type: string
  *           example: "https://miapp.com/montserrat.jpg"
- *         authorId:
+ *         userId:
  *           type: string
  *           example: "65f1c2a1b2c3d4e5f6789001"
  *
@@ -138,7 +138,7 @@ const router = express.Router();
  *         image:
  *           type: string
  *           example: "https://miapp.com/montserrat.jpg"
- *         authorId:
+ *         userId:
  *           type: string
  *           example: "65f1c2a1b2c3d4e5f6789001"
  */

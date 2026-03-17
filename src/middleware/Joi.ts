@@ -44,7 +44,7 @@ export const Schemas = {
             difficulty: Joi.string().valid('easy', 'medium', 'hard').required(),
             tags: Joi.array().items(Joi.string()).optional(),
             image: Joi.string().optional(),
-            authorId: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).required()
+            userId: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).required()
         }),
 
         update: Joi.object({
@@ -57,7 +57,7 @@ export const Schemas = {
             difficulty: Joi.string().valid('easy', 'medium', 'hard').optional(),
             tags: Joi.array().items(Joi.string()).optional(),
             image: Joi.string().optional(),
-            authorId: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).optional()
+            userId: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).optional()
         }).min(1)
     },
 

@@ -10,7 +10,7 @@ export interface IRoute {
     difficulty: 'easy' | 'medium' | 'hard';
     tags: string[];
     image?: string;
-    authorId: string;
+    userId: string;
 }
 
 export interface IRouteModel extends IRoute, Document {}
@@ -30,7 +30,7 @@ const RouteSchema: Schema = new Schema(
         },
         tags: [{ type: String }],
         image: { type: String },
-        authorId: {
+        userId: {
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true

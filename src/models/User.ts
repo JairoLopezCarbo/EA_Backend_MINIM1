@@ -47,7 +47,7 @@ const UserSchema: Schema = new Schema(
 UserSchema.virtual('routes', {
     ref: 'Route',
     localField: '_id',
-    foreignField: 'authorId'
+    foreignField: 'userId'
 });
 
 /**
