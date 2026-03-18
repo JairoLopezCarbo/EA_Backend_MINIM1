@@ -12,11 +12,11 @@ const createUser = async (data: Partial<IUser>): Promise<IUserModel> => {
 };
 
 const getUser = async (userId: string): Promise<IUserModel | null> => {
-    return await User.findById(userId);
+    return await User.findById(userId).populate('routes');
 };
 
 const getAllUsers = async (): Promise<IUserModel[]> => {
-    return await User.find();
+    return await User.find().populate('routes');
 };
 
 const updateUser = async (userId: string, data: Partial<IUser>): Promise<IUserModel | null> => {

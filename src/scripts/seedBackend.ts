@@ -1,0 +1,38 @@
+import { spawn } from 'child_process';
+import path from 'path';
+
+function runSeedScript(scriptFileName: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        const scriptPath = path.resolve(__dirname, scriptFileName);
+        const child = spawn(process.execPath, [scriptPath], {
+            stdio: 'inherit'
+        });
+
+        child.on('error', (error) => {
+            reject(new Error(`No se pudo ejecutar ${scriptFileName}: ${String(error)}`));
+        });
+
+        child.on('close', (code) => {
+            if (code === 0) {
+                resolve();
+                return;
+            }
+
+            reject(new Error(`${scriptFileName} finalizo con codigo ${String(code)}`));
+        });
+    });
+}
+
+async function seedBackend() {
+    try {
+        await runSeedScript('seedUsers.js');
+        await runSeedScript('seedRoutes.js');
+        await runSeedScript('seedPoints.js');
+        process.exit(0);
+    } catch (error) {
+        console.error(`Error al ejecutar seedBackend: ${String(error)}`);
+        process.exit(1);
+    }
+}
+
+seedBackend();
