@@ -7,6 +7,7 @@ import { config } from './config/config';
 import Logging from './library/Logging';
 import UserRoutes from './routes/User';
 import RouteRoutes from './routes/Route';
+import ColeccionRoutes from './routes/Coleccion';
 import PointRoutes from './routes/Point';
 import authRoutes from './routes/auth';
 import swaggerUi from 'swagger-ui-express';
@@ -60,6 +61,7 @@ const StartServer = () => {
     router.use('/auth', authRoutes);
     router.use('/users', UserRoutes);
     router.use('/routes', RouteRoutes);
+    router.use('/colecciones', ColeccionRoutes);
     router.use('/points', PointRoutes);
 
     /** Healthcheck */

@@ -70,6 +70,24 @@ export const Schemas = {
         }).min(1)
     },
 
+    Coleccion: {
+        create: Joi.object({
+            route_ids: Joi.array()
+                .items(Joi.string().pattern(/^[0-9a-fA-F]{24}$/))
+                .min(1)
+                .required(),
+            route_labels: Joi.array().items(Joi.string()).min(1).required()
+        }),
+
+        update: Joi.object({
+            route_ids: Joi.array()
+                .items(Joi.string().pattern(/^[0-9a-fA-F]{24}$/))
+                .min(1)
+                .optional(),
+            route_labels: Joi.array().items(Joi.string()).min(1).optional()
+        }).min(1)
+    },
+
     Point: {
         create: Joi.object({
             name: Joi.string().required(),
