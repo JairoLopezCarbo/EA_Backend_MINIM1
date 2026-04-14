@@ -1,4 +1,5 @@
-[Prompt] (Modelo ia automatico %10 GPT Claude Gemini)
+(Modelo ia automatico %10 GPT Claude Gemini)
+[Prompt] 
 Edita el routes/Coleccion para que funcione este nuevo modelo de colecciones, date cuenta que este archivo es una copia del Route por lo tanto lo tienes que editar entero para que el swagger salga bien. Tambien añade este nuevo schema al joi. Valida tambien que desde models services controllers de coleccion.ts esta bien y funcione como se espera
 
 [Resultado]
